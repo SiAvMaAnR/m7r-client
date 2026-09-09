@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ -z "$1" ]; then
   IMAGE_NAME="samarkinivan/messenger-client"
 else

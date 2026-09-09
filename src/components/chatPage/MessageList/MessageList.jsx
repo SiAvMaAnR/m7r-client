@@ -8,6 +8,7 @@ import { useDebounce, useKeyDown } from '../../../hooks/_exports'
 import { chatMethod } from '../../../socket/hubHandlers'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
 import MessageGroup from './MessageGroup/MessageGroup'
+import MessageListEmpty from './MessageListEmpty/MessageListEmpty'
 import groupMessages from './helpers/groupMessages'
 import MessagesScrollToEnd from './MessagesScrollToEnd/MessagesScrollToEnd'
 import useMessagesReceiver from './hooks/useMessagesReceiver'
@@ -17,7 +18,7 @@ import './MessageList.scss'
 const defaultPageSize = 30
 
 function scrollToEnd(element, isSmooth) {
-  element.scrollTo({
+  element?.scrollTo({
     top: 0,
     behavior: isSmooth ? 'smooth' : 'auto'
   })
@@ -226,11 +227,15 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
     ['Q', 'q']
   )
 
+  const isEmpty = !isListLoading && messages.length === 0
+
   return (
     <div className={`c-message-list ${className}`}>
-      {isListLoading ? (
-        <Loader1 className="loader" />
-      ) : (
+      {isListLoading && <Loader1 className="loader" />}
+
+      {isEmpty && <MessageListEmpty searchQuery={debouncedSearchMessage} />}
+
+      {!isListLoading && !isEmpty && (
         <div className="list" id="scrollableDiv" ref={messageListRef}>
           <MessagesScrollToEnd
             className="messages-scroll"
@@ -276,6 +281,7 @@ function MessageList({ className = '', chatId = null, searchMessage = '' }) {
     </div>
   )
 }
+
 
 MessageList.propTypes = {
   className: PropTypes.string,

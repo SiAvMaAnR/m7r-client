@@ -6,7 +6,7 @@ import ChatHeader from '../../../components/chatPage/ChatHeader/ChatHeader'
 import ChannelList from '../../../components/chatPage/ChannelList/ChannelList'
 import MessageList from '../../../components/chatPage/MessageList/MessageList'
 import NewMessage from '../../../components/chatPage/NewMessage/NewMessage'
-import { Logo } from '../../../components/_exports'
+import NoChatSelected from '../../../components/chatPage/NoChatSelected/NoChatSelected'
 import useMessagesReceiverForCounter from '../../../components/chatPage/MessageList/hooks/useMessagesReceiverForCounter'
 import './Chat.scss'
 
@@ -75,8 +75,7 @@ function Chat() {
           </div>
         ) : (
           <div className="chat not-selected">
-            <Logo className="logo" />
-            <p>Chat not selected</p>
+            <NoChatSelected />
           </div>
         )}
       </div>

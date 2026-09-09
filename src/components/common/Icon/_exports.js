@@ -6,10 +6,10 @@ import CreateIcon from './CreateIcon/CreateIcon'
 import CreateIcon1 from './CreateIcon1/CreateIcon1'
 import DoubleTickIcon from './DoubleTickIcon/DoubleTickIcon'
 import EditIcon from './EditIcon/EditIcon'
+import EmptyChatsIcon from './EmptyChatsIcon/EmptyChatsIcon'
 import FileIcon from './FileIcon/FileIcon'
 import HomeIcon from './HomeIcon/HomeIcon'
 import ImgIcon from './ImgIcon/ImgIcon'
-import JoinIcon from './JoinIcon/JoinIcon'
 import MenuIcon from './MenuIcon/MenuIcon'
 import MessageIcon from './MessageIcon/MessageIcon'
 import MessengerIcon from './MessengerIcon/MessengerIcon'
@@ -40,10 +40,10 @@ export {
   CreateIcon1,
   DoubleTickIcon,
   EditIcon,
+  EmptyChatsIcon,
   FileIcon,
   HomeIcon,
   ImgIcon,
-  JoinIcon,
   MenuIcon,
   MessageIcon,
   MessengerIcon,

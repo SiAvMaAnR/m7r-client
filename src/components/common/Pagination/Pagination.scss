@@ -2,37 +2,65 @@
   width: 100%;
   height: 50px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
   user-select: none;
 
   .pagination-previous,
   .pagination-next {
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: all 0.5s ease;
-    border: solid 1px transparent;
-    gap: 2px;
+    justify-content: center;
+    padding: 9px 16px;
+    border-radius: 24px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+      opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: solid 1px var(--border-color);
+    color: var(--common-color-1);
+    gap: 4px;
 
     &:hover {
-      border-color: var(--border-color);
+      border-color: var(--border-color-1);
+      background: var(--background-color-1);
+      color: var(--font-color-primary-1);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px var(--brand-shadow-xs);
+
+      .pagination-arrow-icon {
+        color: var(--font-color-primary-0);
+      }
+    }
+
+    &.disabled {
+      cursor: default;
+      opacity: 0.4;
+
+      &:hover {
+        border-color: var(--border-color);
+        background: none;
+        color: var(--common-color-1);
+        transform: none;
+        box-shadow: none;
+      }
     }
 
     .pagination-arrow {
+      display: grid;
+      place-items: center;
+      transition: color 0.2s ease, transform 0.2s ease;
+
       .pagination-arrow-icon {
-        transform: scale(0.8);
+        transform: scale(0.7);
       }
     }
 
     .pagination-text {
-      padding: 0 4px;
+      padding: 0 2px;
     }
   }
 
@@ -42,19 +70,32 @@
     }
   }
 
+  .pagination-next:not(.disabled):hover .pagination-arrow {
+    transform: translateX(3px);
+  }
+
+  .pagination-previous:not(.disabled):hover .pagination-arrow {
+    transform: rotateY(180deg) translateX(3px);
+  }
+
   .pagination-info {
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    font-weight: 300;
-    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px;
-    gap: 6px;
+    min-width: 70px;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 24px;
+    border: solid 1px var(--border-color);
+    background: var(--background-color-1);
+    gap: 5px;
 
     .current-index {
       color: var(--current-index-color);
+      font-weight: 700;
     }
   }
 }

@@ -17,6 +17,8 @@
     margin: 0 auto;
     border: solid 1px var(--border-color);
     border-radius: 18px;
+    background: var(--background-color);
+    box-shadow: 0 8px 30px var(--neutral-shadow-sm);
     scrollbar-width: 1px;
     scroll-behavior: smooth;
     overflow-y: auto;
@@ -60,7 +62,7 @@
 
       .table-head {
         height: 50px;
-        font-size: 16px;
+        font-size: 13px;
         user-select: none;
 
         th {
@@ -70,17 +72,43 @@
           background: var(--background-color);
           z-index: 99;
           text-align: center;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
           color: var(--font-color-primary-0);
+
+          &.email,
+          &.login {
+            text-align: left;
+            padding-left: 6px;
+          }
         }
       }
 
       .table-body {
         user-select: none;
 
+        tr {
+          transition: background-color 0.2s ease;
+
+          &:last-child td {
+            border-bottom: none;
+          }
+
+          &:hover {
+            background: var(--background-color-1);
+          }
+        }
+
         td {
           border-bottom: solid 1px var(--border-color);
           height: 61px;
           text-align: center;
+          transition: color 0.2s ease;
+
+          &.email,
+          &.login {
+            text-align: left;
+          }
         }
       }
     }

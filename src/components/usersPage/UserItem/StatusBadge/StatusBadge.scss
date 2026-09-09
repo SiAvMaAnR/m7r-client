@@ -1,0 +1,23 @@
+.c-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--common-color-1);
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--common-color-1);
+        flex: 0 0 8px;
+    }
+
+    &.online {
+        color: var(--font-color-primary-0);
+
+        .status-dot {
+            background: var(--font-color-primary-0);
+            box-shadow: 0 0 0 3px var(--brand-shadow-xs);
+        }
+    }
+}

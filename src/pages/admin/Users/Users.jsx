@@ -69,8 +69,8 @@ function Users() {
                   {}
                 </th>
                 <th width="5%">Id</th>
-                <th width="20%">Email</th>
-                <th width="15%">Login</th>
+                <th className="email" width="20%">Email</th>
+                <th className="login" width="15%">Login</th>
                 <th width="5%">Birthday</th>
                 <th width="5%">Status</th>
                 <th width="5%">Banned</th>

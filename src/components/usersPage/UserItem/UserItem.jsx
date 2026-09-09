@@ -6,11 +6,12 @@ import api from '../../../api/api'
 import UnblockIcon from '../../common/Icon/UnblockIcon/UnblockIcon'
 import BlockIcon from '../../common/Icon/BlockIcon/BlockIcon'
 import Avatar from '../../common/Avatar/Avatar'
+import StatusBadge from './StatusBadge/StatusBadge'
 import './UserItem.scss'
 
 function UserItem({ className = '', userInfo = null, loadUsers = null }) {
   const { id, login, email, birthday, activityStatus: status, isBanned, imageId } = userInfo
-  const activityStatusClass = status.toLowerCase() === activityStatus.online ? 'online' : ''
+  const isOnline = status.toLowerCase() === activityStatus.online
   const bannedClass = isBanned ? 'yes' : ''
   const dropDownItems = [
     isBanned
@@ -39,11 +40,11 @@ function UserItem({ className = '', userInfo = null, loadUsers = null }) {
       <td className="email">{email}</td>
       <td className="login">{login}</td>
       <td className="birthday">{birthday}</td>
-      <td className={`activity-status ${activityStatusClass}`}>
-        {status}
+      <td className="activity-status" aria-label={status}>
+        <StatusBadge status={status} isOnline={isOnline} />
       </td>
       <td className={`banned ${bannedClass}`}>
-        {isBanned ? 'Yes' : '-'}
+        <span className="banned-badge">{isBanned ? 'Banned' : 'Active'}</span>
       </td>
       <td className="tools">
         <DropDown items={dropDownItems} className="bottom">

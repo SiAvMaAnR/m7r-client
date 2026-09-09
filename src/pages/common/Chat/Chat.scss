@@ -25,20 +25,7 @@
       &.not-selected {
         align-items: center;
         justify-content: center;
-        gap: 35px;
         user-select: none;
-
-        .logo svg {
-          height: 130px;
-          width: 130px;
-        }
-
-        p {
-          font-family: 'Montserrat', sans-serif;
-          font-weight: 600;
-          font-size: 22px;
-          color: var(--font-color-primary-0);
-        }
       }
 
       .chat-header-container {

@@ -6,13 +6,13 @@ import Channel from './Channel/Channel'
 import ChannelFilter from './ChannelFilter/ChannelFilter'
 import { ToolTip1 } from '../../_exports'
 import ChannelSearch from './ChannelSearch/ChannelSearch'
+import ChannelListEmpty from './ChannelListEmpty/ChannelListEmpty'
 import api from '../../../api/api'
 import { useDebounce } from '../../../hooks/_exports'
 import { page } from '../../../constants/system'
 import { chatMethod } from '../../../socket/hubHandlers'
 import DropDown from '../../common/DropDown/DropDown'
-import {AIIcon, CreateIcon, CreateIcon1, JoinIcon} from '../../common/Icon/_exports'
-import JoinChannelModal from '../Modals/JoinChannelModal/JoinChannelModal'
+import { AIIcon, CreateIcon, CreateIcon1 } from '../../common/Icon/_exports'
 import Loader1 from '../../common/Loader/Loader1/Loader1'
 import CreateAIChannelModal from '../Modals/CreateAIChannelModal/CreateAIChannelModal'
 import CreateChannelModal from '../Modals/CreateChannelModal/CreateChannelModal'
@@ -29,7 +29,6 @@ function ChannelList({ className = '', selectedChannelId = null }) {
   const [searchChannel, setSearchChannel] = useState('')
   const debouncedSearchChannel = useDebounce(searchChannel, 500)
   const [isActiveCreateChannelModal, setIsActiveCreateChannelModal] = useState(false)
-  const [isActiveJoinChannelModal, setIsActiveJoinChannelModal] = useState(false)
   const [isActiveCreateAIChannelModal, setIsActiveCreateAIChannelModal] = useState(false)
   const [activeChannelType, setActiveChannelCount] = useState(null)
   const pageNumberRef = useRef(0)
@@ -173,16 +172,13 @@ function ChannelList({ className = '', selectedChannelId = null }) {
       onClick: () => setIsActiveCreateChannelModal(true)
     },
     {
-      icon: <JoinIcon />,
-      title: 'Join chat',
-      onClick: () => setIsActiveJoinChannelModal(true)
-    },
-    {
       icon: <AIIcon />,
       title: 'AI chat',
       onClick: () => setIsActiveCreateAIChannelModal(true)
     }
   ]
+
+  const isEmpty = !isListLoading && channels.length === 0
 
   return (
     <>
@@ -190,10 +186,6 @@ function ChannelList({ className = '', selectedChannelId = null }) {
         setIsActive={setIsActiveCreateChannelModal}
         isActive={isActiveCreateChannelModal}
         onCreatedChannel={onCreatedChannelHandler}
-      />
-      <JoinChannelModal
-        setIsActive={setIsActiveJoinChannelModal}
-        isActive={isActiveJoinChannelModal}
       />
       <CreateAIChannelModal
         setIsActive={setIsActiveCreateAIChannelModal}
@@ -224,9 +216,11 @@ function ChannelList({ className = '', selectedChannelId = null }) {
         </div>
 
         <div className="list" onScroll={scrollHandler} ref={channelListRef}>
-          {isListLoading ? (
-            <Loader1 className="loader" />
-          ) : (
+          {isListLoading && <Loader1 className="loader" />}
+
+          {isEmpty && <ChannelListEmpty isSearching={!!debouncedSearchChannel} />}
+
+          {!isListLoading &&
             channels.map((channel) => (
               <Channel
                 key={channel.id}
@@ -236,8 +230,7 @@ function ChannelList({ className = '', selectedChannelId = null }) {
                 isActive={+selectedChannelId === channel.id}
                 data={channel}
               />
-            ))
-          )}
+            ))}
         </div>
       </div>
     </>

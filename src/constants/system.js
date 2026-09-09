@@ -42,7 +42,6 @@ const hub = {
 
 const services = {
   auth: 'auth',
-  accounts: 'accounts',
   chat: 'chat',
   notifications: 'notifications',
   ai: 'ai',
